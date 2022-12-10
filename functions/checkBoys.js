@@ -1,0 +1,31 @@
+const fs = require("node:fs/promises");
+const path = require("node:path");
+
+const boysRoute = require("../pathes");
+
+async function checkBoys() {
+  const dataDir = await fs.readdir(boysRoute.boysPath);
+  const arrBoys = [];
+
+  for (const string of dataDir) {
+    const pathToFile = path.join(boysRoute.boysPath, string);
+
+    const dataFile = await fs.readFile(pathToFile, "utf-8");
+
+    const parsedFile = JSON.parse(dataFile);
+    arrBoys.push(parsedFile);
+  }
+
+  arrBoys.forEach((item) => {
+    if (item.gender === "female") {
+      const GirlNeededToMove = path.join(`${item.name.toLowerCase()}.json`);
+
+      return fs.rename(
+        `./boys/${GirlNeededToMove}`,
+        `./girls/${GirlNeededToMove}`
+      );
+    }
+  });
+}
+
+module.exports = checkBoys;
