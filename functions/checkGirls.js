@@ -1,14 +1,13 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
-
-const girlsRoute = require("../pathes");
+const { girlsPath } = require("../pathes");
 
 async function checkGirls() {
-  const dataDir = await fs.readdir(girlsRoute.girlsPath);
+  const dataDir = await fs.readdir(girlsPath);
   const arrGirls = [];
 
   for (const string of dataDir) {
-    const pathToFile = path.join(girlsRoute.girlsPath, string);
+    const pathToFile = path.join(girlsPath, string);
 
     const dataFile = await fs.readFile(pathToFile, "utf-8");
 
