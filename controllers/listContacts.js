@@ -12,7 +12,11 @@ const listContacts = async (_, res) => {
       },
     });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).json({
+      status: "error",
+      code: 400,
+      message: "error.message",
+    });
   }
 };
 

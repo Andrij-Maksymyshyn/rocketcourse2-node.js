@@ -12,7 +12,11 @@ const createContact = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).json({
+      status: "error",
+      code: 400,
+      message: "Contact with req.email is already exist",
+    });
   }
 };
 
