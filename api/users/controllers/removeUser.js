@@ -19,11 +19,6 @@ const removeUser = async (req, res, next) => {
       },
     });
   } catch (error) {
-    // res.status(404).json({
-    //   status: "error",
-    //   code: 404,
-    //   message: "User with req.id is not existed",
-    // });
     next(error);
   }
 };

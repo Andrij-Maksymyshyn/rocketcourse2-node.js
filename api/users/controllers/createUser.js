@@ -12,11 +12,6 @@ const createUser = async (req, res, next) => {
       },
     });
   } catch (error) {
-    // res.status(400).json({
-    //   status: "error",
-    //   code: 400,
-    //   message: "User with req.email is already exist",
-    // });
     next(error);
   }
 };

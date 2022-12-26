@@ -12,11 +12,6 @@ const listUsers = async (_, res, next) => {
       },
     });
   } catch (error) {
-    // res.status(400).json({
-    //   status: "error",
-    //   code: 400,
-    //   message: "error.message",
-    // });
     next(error);
   }
 };
