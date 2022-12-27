@@ -11,7 +11,7 @@ const checkIsEmailExists = async (req, _, next) => {
 
     if (findUserEmail(normalizedEmail)) {
       throw new Conflict(
-        `Users with email: ${req.body.email} already exist. Please enter another entities.`
+        `User with email: ${req.body.email} already exist. Please enter another entities.`
       );
     }
 
