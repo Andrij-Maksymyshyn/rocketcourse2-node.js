@@ -1,30 +1,12 @@
-const getAllUsers = require("./getAllUsers");
-const updateUsers = require("./updateUsers");
+const { User } = require("../../../models");
 
-const addUser = async ({ name, email, phone }) => {
-  const users = await getAllUsers();
-
-  const newUser = {
-    id: Date.now().toString(),
-    name,
+const addUser = async ({ firstName, lastName, email, age }) => {
+  const newUser = await User.create({
+    firstName,
+    lastName,
     email,
-    phone,
-  };
-
-  const normalizedEmail = newUser.email.toLowerCase();
-
-  const findUserEmail = (newUserEmail) =>
-    users.find(({ email }) => email.toLowerCase() === newUserEmail);
-
-  if (findUserEmail(normalizedEmail)) {
-    throw new Error(
-      `Users with email: ${email} already exist. Please enter another entities.`
-    );
-  }
-
-  users.push(newUser);
-
-  await updateUsers(users);
+    age,
+  });
 
   return newUser;
 };

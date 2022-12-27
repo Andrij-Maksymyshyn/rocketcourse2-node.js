@@ -1,5 +1,5 @@
 const services = require("../services");
-const ApiError = require("../../../errors/ApiEror");
+const { NotFound } = require("../../../errors/ApiEror");
 
 const checkIsUserExists = async (req, _, next) => {
   try {
@@ -7,14 +7,15 @@ const checkIsUserExists = async (req, _, next) => {
     const user = await services.getUserById(userId);
 
     if (!user) {
-      throw new ApiError(`user with id = ${userId} not found`, 404);
+      throw new NotFound(`user with id = ${userId} not found`);
     }
 
     req.user = user;
+
     next();
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { checkIsUserExists };
+module.exports = checkIsUserExists;

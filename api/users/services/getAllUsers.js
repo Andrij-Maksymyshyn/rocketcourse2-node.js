@@ -1,11 +1,13 @@
-const fs = require("node:fs/promises");
-const usersPath = require("./usersPath");
+const { User } = require("../../../models");
 
 const getAllUsers = async () => {
-  const data = await fs.readFile(usersPath);
-  const parsedAllUsers = JSON.parse(data);
+  const data = await User.find({});
 
-  return parsedAllUsers;
+  if (!data) {
+    return null;
+  }
+
+  return data;
 };
 
 module.exports = getAllUsers;

@@ -1,4 +1,5 @@
 const services = require("../services");
+const { NotFound } = require("../../../errors/ApiEror");
 
 const removeUser = async (req, res, next) => {
   try {
@@ -6,7 +7,7 @@ const removeUser = async (req, res, next) => {
     const result = await services.deleteById(userId);
 
     if (!result) {
-      throw new Errror(`User with id = ${userId} not found`);
+      throw new NotFound(`User with id = ${userId} not found`);
     }
 
     //   res.status(204).json();
