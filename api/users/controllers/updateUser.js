@@ -1,4 +1,5 @@
 const services = require("../services");
+const { NotFound } = require("../../../errors/ApiEror");
 
 const updateUser = async (req, res, next) => {
   try {
@@ -6,7 +7,7 @@ const updateUser = async (req, res, next) => {
     const result = await services.updateById(userId, req.body);
 
     if (!result) {
-      throw new Error(`user with id = ${userId} not found`);
+      throw new NotFound(`user with id = ${userId} not found`);
     }
 
     res.json({

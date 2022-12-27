@@ -1,17 +1,11 @@
-const getAllUsers = require("./getAllUsers");
-const updateUsers = require("./updateUsers");
+const { User } = require("../../../models");
 
 const deleteById = async (id) => {
-  const users = await getAllUsers();
-  const idx = await users.findIndex((user) => user.id === id.toString());
+  const removedUser = await User.findByIdAndRemove(id);
 
-  if (idx === -1) {
+  if (!removedUser) {
     return null;
   }
-
-  const [removedUser] = users.splice(idx, 1);
-
-  await updateUsers(users);
 
   return removedUser;
 };

@@ -1,4 +1,4 @@
-const singleUser = async (req, res, next) => {
+const singleUser = (req, res, next) => {
   try {
     const result = req.user;
 

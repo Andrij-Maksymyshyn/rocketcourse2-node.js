@@ -1,19 +1,13 @@
-const getAllUsers = require("./getAllUsers");
-const updateUsers = require("./updateUsers");
+const { User } = require("../../../models");
 
 const updateById = async (id, data) => {
-  const users = await getAllUsers();
-  const idx = await users.findIndex((user) => user.id === id.toString());
+  const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
 
-  if (idx === -1) {
+  if (!updatedUser) {
     return null;
   }
 
-  users[idx] = { id, ...data };
-
-  await updateUsers(users);
-
-  return users[idx];
+  return updatedUser;
 };
 
 module.exports = updateById;

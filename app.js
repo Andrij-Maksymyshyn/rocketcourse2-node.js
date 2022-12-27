@@ -1,8 +1,10 @@
 const express = require("express");
 require("dotenv").config();
+const mongoose = require("mongoose");
 const logger = require("morgan");
 const mainRouter = require("./routes/mainRouter");
-const ApiError = require("./errors/ApiEror");
+const { NotFound } = require("./errors/ApiEror");
+const { SERVER_ERROR } = require("./errors/errorCodes");
 
 const app = express();
 
@@ -16,18 +18,29 @@ app.use("/", mainRouter);
 app.use("*", notFoundError);
 app.use(mainErrorHandler);
 
-const { PORT = 5000 } = process.env;
+const { DB_HOST, PORT = 5000 } = process.env;
 
-app.listen(PORT, () => {
-  console.log(`Server running. Use our API on port: ${PORT}`);
-});
+mongoose
+  .set("debug", true)
+  .set("strictQuery", true)
+  .connect(DB_HOST)
+  .then(() => app.listen(PORT))
+  .then(() =>
+    console.log(
+      `Database connection successful. Server running. Use our API on port: ${PORT}`
+    )
+  )
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
 
 function notFoundError(_, _, next) {
-  next(new ApiError("Route not found", 404));
+  next(new NotFound("Route not found"));
 }
 
 function mainErrorHandler(err, _, res, _) {
   res
-    .status(err.status || 500)
+    .status(err.status || SERVER_ERROR)
     .json({ message: err.message || "Unknown error" });
 }

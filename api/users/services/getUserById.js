@@ -1,8 +1,7 @@
-const getAllUsers = require("./getAllUsers");
+const { User } = require("../../../models");
 
 const getUserById = async (userId) => {
-  const users = await getAllUsers();
-  const result = await users.find(({ id }) => id === userId.toString());
+  const result = await User.findById(userId);
 
   if (!result) {
     return null;

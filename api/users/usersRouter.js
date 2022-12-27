@@ -1,12 +1,23 @@
 const controllers = require("./controllers");
-const mdlwr = require("./middlewares/middleware");
+const {
+  checkIsUserExists,
+  checkIsEmailExists,
+  validateNames,
+  validateAge,
+} = require("./middlewares");
 const usersRouter = require("express").Router();
 
 usersRouter.get("/", controllers.listUsers);
 
-usersRouter.post("/", controllers.createUser);
+usersRouter.post(
+  "/",
+  validateNames,
+  checkIsEmailExists,
+  validateAge,
+  controllers.createUser
+);
 
-usersRouter.use("/:userId", mdlwr.checkIsUserExists);
+usersRouter.use("/:userId", checkIsUserExists);
 
 usersRouter.get("/:userId", controllers.singleUser);
 
