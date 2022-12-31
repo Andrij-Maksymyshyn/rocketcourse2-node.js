@@ -4,13 +4,7 @@ const validateAge = (req, _, next) => {
   try {
     const neededAge = req.body.age;
 
-    if (typeof neededAge !== "number") {
-      throw new BadRequest(
-        "Please, enter correct type of age (it's must be a number)"
-      );
-    }
-
-    if (!Number.isInteger(neededAge)) {
+    if (typeof neededAge !== "number" || !Number.isInteger(neededAge)) {
       throw new BadRequest(
         "Please, enter correct type of age (it's must be an integer number)"
       );
