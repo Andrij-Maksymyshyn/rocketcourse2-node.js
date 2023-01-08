@@ -11,6 +11,7 @@ const userSchema = Schema(
       required: true,
       unique: true,
     },
+    password: { type: String, minLength: 7, required: true, default: "" },
     age: { type: Number },
   },
   {

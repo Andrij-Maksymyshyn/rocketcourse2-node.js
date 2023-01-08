@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const mainRouter = require("./routes/mainRouter");
-const { NotFound } = require("./errors/ApiEror");
+const { NotFound } = require("./errors/ApiError");
 const { SERVER_ERROR } = require("./errors/errorCodes");
 
 const app = express();

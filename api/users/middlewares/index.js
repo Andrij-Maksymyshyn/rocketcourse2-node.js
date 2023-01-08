@@ -1,11 +1,9 @@
-const checkIsUserExists = require("./checkIsUserExists");
-const checkIsEmailExists = require("./checkIsEmailExists");
-const validateNames = require("./validateNames");
-const validateAge = require("./validateAge");
+const getUserDynamicly = require("./getUserDynamicly");
+const validateUser = require("./validateUser");
+const checkUserDuplicates = require("./checkUserDuplicates");
 
 module.exports = {
-  checkIsUserExists,
-  checkIsEmailExists,
-  validateNames,
-  validateAge,
+  getUserDynamicly,
+  validateUser,
+  checkUserDuplicates,
 };
