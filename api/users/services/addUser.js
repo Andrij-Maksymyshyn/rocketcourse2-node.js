@@ -1,12 +1,7 @@
 const { User } = require("../../../models");
 
-const addUser = async ({ firstName, lastName, email, age }) => {
-  const newUser = await User.create({
-    firstName,
-    lastName,
-    email,
-    age,
-  });
+const addUser = async (userObject) => {
+  const newUser = await User.create(userObject);
 
   return newUser;
 };

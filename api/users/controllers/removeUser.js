@@ -1,5 +1,5 @@
 const services = require("../services");
-const { NotFound } = require("../../../errors/ApiEror");
+const { NotFound } = require("../../../errors/ApiError");
 
 const removeUser = async (req, res, next) => {
   try {
