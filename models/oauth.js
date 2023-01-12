@@ -1,18 +1,20 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const oauthSchema = Schema(
+const oauthSchema = new mongoose.Schema(
   {
     accessToken: { type: String, trim: true, required: true },
     refreshToken: { type: String, trim: true, required: true },
-    user: { type: Schema.Types.ObjectId, required: true, ref: "User" },
+    user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
   },
   {
     timestamps: true,
     versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
-const Oauth = model("oauth", oauthSchema);
+const Oauth = mongoose.model("Oauth", oauthSchema);
 
 module.exports = {
   Oauth,

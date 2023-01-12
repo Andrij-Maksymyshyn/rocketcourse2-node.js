@@ -1,7 +1,7 @@
 const { User } = require("../../../models");
 
-const findUserByParams = async (searchObject) => {
-  return await User.findOne(searchObject);
+const findUserByParams = (searchObject) => {
+  return User.findOne(searchObject);
 };
 
 module.exports = findUserByParams;

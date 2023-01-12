@@ -14,7 +14,7 @@ const newUserSchema = Joi.object({
     .min(2)
     .max(12)
     .trim()
-    .error(new Error("firstName is not valid")),
+    .error(new Error("lastName is not valid")),
 
   email: Joi.string()
     .regex(EMAIL_REGEXP)

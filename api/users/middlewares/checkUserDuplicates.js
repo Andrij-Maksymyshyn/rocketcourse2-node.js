@@ -10,7 +10,7 @@ const checkUserDuplicates =
       const user = await services.findUserByParams({ [dbField]: searchData });
 
       if (user) {
-        throw new NotFound("User with such info already exists");
+        throw new NotFound("User with such email already exists");
       }
 
       req.user = user;

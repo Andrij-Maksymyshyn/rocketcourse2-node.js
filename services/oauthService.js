@@ -7,7 +7,7 @@ const { BadRequest, Unauthorized } = require("../errors/ApiError");
 const hashPassword = (password) => bcrypt.hash(password, 10);
 
 const checkPasswords = async (hashedPassword, password) => {
-  const isPasswordEquals = await bcrypt.compare(hashedPassword, password);
+  const isPasswordEquals = await bcrypt.compare(password, hashedPassword);
 
   if (!isPasswordEquals) {
     throw new BadRequest("Email or password is wrong");
@@ -29,13 +29,19 @@ const generateAccessTokenPair = (encodeData = {}) => {
   };
 };
 
-const validateToken = () => {};
+const validateRefreshToken = (refreshToken = "") => {
+  try {
+    return jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+  } catch (error) {
+    throw new Unauthorized(error.message || "Invalid token (signature)");
+  }
+};
 
 const validateAccessToken = (accessToken = "") => {
   try {
     return jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-  } catch (e) {
-    throw new Unauthorized(e.message || "Invalid token");
+  } catch (error) {
+    throw new Unauthorized(error.message || "Invalid token (signature)");
   }
 };
 
@@ -43,6 +49,6 @@ module.exports = {
   hashPassword,
   checkPasswords,
   generateAccessTokenPair,
-  validateToken,
+  validateRefreshToken,
   validateAccessToken,
 };
