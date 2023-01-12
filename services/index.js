@@ -1,15 +1,13 @@
-const {
-  hashPassword,
-  checkPasswords,
-  generateAccessTokenPair,
-  validateToken,
-  validateAccessToken,
-} = require("./oauthService");
+const { hashPassword } = require("./oauthService");
+const { checkPasswords } = require("./oauthService");
+const { generateAccessTokenPair } = require("./oauthService");
+const { validateRefreshToken } = require("./oauthService");
+const { validateAccessToken } = require("./oauthService");
 
 module.exports = {
   hashPassword,
   checkPasswords,
   generateAccessTokenPair,
-  validateToken,
+  validateRefreshToken,
   validateAccessToken,
 };

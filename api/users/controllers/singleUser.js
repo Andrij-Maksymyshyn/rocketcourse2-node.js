@@ -1,6 +1,6 @@
 const singleUser = (req, res, next) => {
   try {
-    const result = req.user;
+    const result = req.locals.user;
 
     res.json({
       status: "success",

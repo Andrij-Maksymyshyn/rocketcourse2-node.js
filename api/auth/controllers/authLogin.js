@@ -6,10 +6,10 @@ const {
 
 const loginUser = async (req, res, next) => {
   try {
-    const user = req.user.toObject();
+    const user = req.locals.user;
 
     await checkPasswords(user.password, req.body.password);
-    const tokenPair = generateAccessTokenPair(user);
+    const tokenPair = generateAccessTokenPair({ ...user });
 
     await createOauthPair({ ...tokenPair, user: user._id });
     res.json({ ...tokenPair, user });
