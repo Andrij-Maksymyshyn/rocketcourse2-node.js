@@ -29,17 +29,12 @@ const generateAccessTokenPair = (encodeData = {}) => {
   };
 };
 
-const validateRefreshToken = (refreshToken = "") => {
+const validateToken = (token = "", tokenType = "") => {
   try {
-    return jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
-  } catch (error) {
-    throw new Unauthorized(error.message || "Invalid token (signature)");
-  }
-};
-
-const validateAccessToken = (accessToken = "") => {
-  try {
-    return jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
+    return jwt.verify(
+      token,
+      tokenType === "accessToken" ? ACCESS_TOKEN_SECRET : REFRESH_TOKEN_SECRET
+    );
   } catch (error) {
     throw new Unauthorized(error.message || "Invalid token (signature)");
   }
@@ -49,6 +44,5 @@ module.exports = {
   hashPassword,
   checkPasswords,
   generateAccessTokenPair,
-  validateRefreshToken,
-  validateAccessToken,
+  validateToken,
 };

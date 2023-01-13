@@ -12,7 +12,7 @@ const refreshUser = async (req, res, next) => {
     await deleteOneByParamsOne({ accessToken });
     await deleteOneByParamsOne({ refreshToken });
 
-    const tokenPair = generateAccessTokenPair({ ...user });
+    const tokenPair = generateAccessTokenPair({ ...user.id });
 
     await createOauthPair({ ...tokenPair, user: user._id });
     res.json({ ...tokenPair, user });
