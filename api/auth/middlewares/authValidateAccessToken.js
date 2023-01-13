@@ -1,5 +1,5 @@
 const { Unauthorized } = require("../../../errors/ApiError");
-const { validateAccessToken } = require("../../../services");
+const { validateToken } = require("../../../services");
 const { getByParams } = require("../services");
 
 const authValidateAccessToken = async (req, _, next) => {
@@ -10,7 +10,7 @@ const authValidateAccessToken = async (req, _, next) => {
       throw new Unauthorized("No token");
     }
 
-    validateAccessToken(accessToken);
+    validateToken(accessToken, "accessToken");
 
     const tokenWithUser = await getByParams({ accessToken });
 
