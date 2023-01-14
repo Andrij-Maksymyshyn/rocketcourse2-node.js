@@ -5,8 +5,8 @@ const getMyProfile = (req, res, next) => {
       ...req.user.toObject(),
       additionalData: { unreadMessage },
     });
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
 
