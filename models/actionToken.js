@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const oauthSchema = new mongoose.Schema(
+const actionTokenSchema = new mongoose.Schema(
   {
-    accessToken: { type: String, trim: true, required: true },
-    refreshToken: { type: String, trim: true, required: true },
+    token: { type: String, trim: true, required: true },
+    actionType: { type: String, trim: true, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
   },
   {
@@ -14,12 +14,12 @@ const oauthSchema = new mongoose.Schema(
   }
 );
 
-oauthSchema.pre(/^find/, function () {
+actionTokenSchema.pre(/^find/, function () {
   this.populate("user");
 });
 
-const Oauth = mongoose.model("Oauth", oauthSchema);
+const ActionToken = mongoose.model("Action_Token", actionTokenSchema);
 
 module.exports = {
-  Oauth,
+  ActionToken,
 };

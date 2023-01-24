@@ -1,5 +1,5 @@
 const services = require("../services");
-const { NotFound } = require("../../../errors/ApiError");
+const { Conflict } = require("../../../errors/ApiError");
 
 const checkUserDuplicates =
   (paramName, from, dbField = paramName) =>
@@ -10,7 +10,7 @@ const checkUserDuplicates =
       const user = await services.findUserByParams({ [dbField]: searchData });
 
       if (user) {
-        throw new NotFound("User with such email already exists");
+        throw new Conflict("User with such email already exists");
       }
 
       req.user = user;

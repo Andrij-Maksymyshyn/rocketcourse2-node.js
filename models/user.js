@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema(
     },
     password: { type: String, minLength: 7, required: true, default: "" },
     age: { type: Number },
+    status: {
+      type: String,
+      enum: ["pending", "active", "banned"],
+      default: "pending",
+    },
   },
   {
     timestamps: true,
@@ -39,6 +44,10 @@ const userSchema = new mongoose.Schema(
     },
   }
 );
+
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`.trim();
+});
 
 const User = mongoose.model("User", userSchema);
 

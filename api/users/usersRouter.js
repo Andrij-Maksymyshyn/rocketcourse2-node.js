@@ -4,11 +4,16 @@ const {
   validateUser,
   checkUserDuplicates,
 } = require("./middlewares");
+const { validateActionConfirmToken } = require("./middlewares");
 const { authValidateAccessToken } = require("../auth/middlewares");
 const { objectIdValidator } = require("../../unitedMiddlewares");
+const { CONFIRM_ACCAUNT } = require("../../configs/actionTokenTypes.enum");
+
 const usersRouter = require("express").Router();
 
 usersRouter.get("/", controllers.listUsers);
+
+usersRouter.get("/profile", authValidateAccessToken, controllers.getMyProfile);
 
 usersRouter.post(
   "/",
@@ -17,7 +22,11 @@ usersRouter.post(
   controllers.createUser
 );
 
-usersRouter.get("/profile", authValidateAccessToken, controllers.getMyProfile);
+usersRouter.patch(
+  "/user/confirm",
+  validateActionConfirmToken(CONFIRM_ACCAUNT),
+  controllers.confirmAccaunt
+);
 
 usersRouter.use(
   "/:userId",

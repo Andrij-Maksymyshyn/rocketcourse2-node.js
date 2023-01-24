@@ -4,6 +4,7 @@ const {
   FORBIDDEN,
   NOT_FOUND,
   CONFLICT,
+  SERVER_ERROR,
 } = require("./errorCodes");
 
 class ApiError extends Error {
@@ -48,6 +49,13 @@ class Conflict extends Error {
   }
 }
 
+class ServerError extends Error {
+  constructor(message) {
+    super(message);
+    this.status = SERVER_ERROR;
+  }
+}
+
 module.exports = {
   ApiError,
   BadRequest,
@@ -55,4 +63,6 @@ module.exports = {
   Forbidden,
   NotFound,
   Conflict,
+
+  ServerError,
 };
