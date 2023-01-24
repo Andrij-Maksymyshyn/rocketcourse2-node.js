@@ -1,11 +1,17 @@
-const { hashPassword } = require("./oauthService");
-const { checkPasswords } = require("./oauthService");
-const { generateAccessTokenPair } = require("./oauthService");
-const { validateToken } = require("./oauthService");
+const {
+  hashPassword,
+  checkPasswords,
+  generateAccessTokenPair,
+  ganarateActionToken,
+  validateToken,
+} = require("./oauthService");
+const sendMail = require("./emailService");
 
 module.exports = {
   hashPassword,
   checkPasswords,
   generateAccessTokenPair,
+  ganarateActionToken,
   validateToken,
+  sendMail,
 };

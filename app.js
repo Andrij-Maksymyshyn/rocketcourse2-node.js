@@ -2,6 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const logger = require("morgan");
+
+global.rootPath = __dirname;
 const mainRouter = require("./routes/mainRouter");
 const { NotFound } = require("./errors/ApiError");
 const { SERVER_ERROR } = require("./errors/errorCodes");

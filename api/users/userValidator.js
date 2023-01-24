@@ -26,6 +26,8 @@ const newUserSchema = Joi.object({
   password: Joi.string().regex(PASSWORD_REGEXP).required(),
 
   age: Joi.number().integer().min(1).max(120),
+
+  status: Joi.string().valid("pending", "active", "banned"),
 });
 
 module.exports = {

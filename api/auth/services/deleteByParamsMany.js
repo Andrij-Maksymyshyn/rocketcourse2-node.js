@@ -1,7 +1,7 @@
 const { Oauth } = require("../../../models");
 
-const deleteManyByParamsMany = (deleteData = {}) => {
+const deleteManyByParams = (deleteData = {}) => {
   return Oauth.deleteMany(deleteData);
 };
 
-module.exports = deleteManyByParamsMany;
+module.exports = deleteManyByParams;
