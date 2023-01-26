@@ -6,6 +6,7 @@ const {
   validateToken,
 } = require("./oauthService");
 const sendMail = require("./emailService");
+const uploadFileToS3 = require("./fileService");
 
 module.exports = {
   hashPassword,
@@ -14,4 +15,5 @@ module.exports = {
   ganarateActionToken,
   validateToken,
   sendMail,
+  uploadFileToS3,
 };
