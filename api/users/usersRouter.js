@@ -40,4 +40,6 @@ usersRouter.put("/:userId", controllers.updateUser);
 
 usersRouter.delete("/:userId", controllers.removeUser);
 
+usersRouter.post("/:userId/avatar", controllers.uploadUserAvatar);
+
 module.exports = usersRouter;

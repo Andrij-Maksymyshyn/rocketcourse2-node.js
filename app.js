@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const fileUpload = require("express-fileupload");
 const logger = require("morgan");
 
 global.rootPath = __dirname;
@@ -15,6 +16,12 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  fileUpload({
+    limits: { fileSize: 200 * 1024 * 1024 },
+  })
+);
 
 app.use("/", mainRouter);
 app.use("*", notFoundError);
