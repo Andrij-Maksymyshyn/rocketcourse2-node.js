@@ -3,6 +3,7 @@ const {
   getUserDynamicly,
   validateUser,
   checkUserDuplicates,
+  checkUserAvatar,
 } = require("./middlewares");
 const { validateActionConfirmToken } = require("./middlewares");
 const { authValidateAccessToken } = require("../auth/middlewares");
@@ -40,6 +41,10 @@ usersRouter.put("/:userId", controllers.updateUser);
 
 usersRouter.delete("/:userId", controllers.removeUser);
 
-usersRouter.post("/:userId/avatar", controllers.uploadUserAvatar);
+usersRouter.post(
+  "/:userId/avatar",
+  checkUserAvatar,
+  controllers.uploadUserAvatar
+);
 
 module.exports = usersRouter;

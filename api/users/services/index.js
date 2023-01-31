@@ -3,6 +3,7 @@ const addUser = require("./addUser");
 const updateById = require("./updateById");
 const deleteById = require("./deleteById");
 const findUserByParams = require("./findUserByParams");
+const findAvatarByParams = require("./findAvatarByParams");
 
 module.exports = {
   getAllUsers,
@@ -10,4 +11,5 @@ module.exports = {
   updateById,
   deleteById,
   findUserByParams,
+  findAvatarByParams,
 };

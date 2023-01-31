@@ -28,6 +28,8 @@ const newUserSchema = Joi.object({
   age: Joi.number().integer().min(1).max(120),
 
   status: Joi.string().valid("pending", "active", "banned"),
+
+  avatarUrl: Joi.string(),
 });
 
 module.exports = {
