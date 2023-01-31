@@ -16,13 +16,13 @@ const getMyProfile = async (req, res, next) => {
     });
 
     await updateById(userId, {
-      avatarUrl: newUserAvatar[newUserAvatar.length - 1].url,
+      avatarUrl: newUserAvatar[newUserAvatar.length - 1]?.url,
     });
 
     res.json({
       ...req.user.toObject(),
       additionalData: { unreadMessage },
-      avatarUrl: newUserAvatar[newUserAvatar.length - 1].url,
+      avatarUrl: newUserAvatar[newUserAvatar.length - 1]?.url,
     });
   } catch (error) {
     next(error);
