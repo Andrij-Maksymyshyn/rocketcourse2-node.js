@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
       enum: ["pending", "active", "banned"],
       default: "pending",
     },
+    avatarUrl: { type: String, trim: true, default: "" },
   },
   {
     timestamps: true,

@@ -5,7 +5,11 @@ const {
   sendMail,
   ganarateActionToken,
 } = require("../../../services");
-const { CONFIRM, INVITATION } = require("../../../configs/emailTypes.enum");
+const {
+  CONFIRM,
+  INVITATION,
+  BANNED,
+} = require("../../../configs/emailTypes.enum");
 const { CONFIRM_ACCAUNT } = require("../../../configs/actionTokenTypes.enum");
 const { Unauthorized } = require("../../../errors/ApiError");
 const { FRONTEND_URL } = process.env;
@@ -44,6 +48,10 @@ const loginUser = async (req, res, next) => {
       throw new Unauthorized(
         "Accaunt is not activated. Please, confirm your accaunt!"
       );
+    }
+
+    if (user.status === "banned") {
+      await sendMail("andrewmax1984777@gmail.com", BANNED);
     }
   } catch (error) {
     next(error);

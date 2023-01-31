@@ -1,3 +1,4 @@
+const path = require("node:path");
 const AWS_S3 = require("aws-sdk/clients/s3");
 const { S3_REGION, S3_BUCKET, AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY } =
   process.env;
@@ -10,13 +11,24 @@ const S3 = new AWS_S3({
   signatureVersion: "v4",
 });
 
-function uploadFileToS3(file) {
+function uploadFileToS3(file, itemId, itemType) {
+  const Key = fileNameBuilder(file, itemId, itemType);
+
   return S3.upload({
     Bucket: S3_BUCKET,
     Body: file.data,
-    Key: "image.jpg",
-    ACL: "public read",
+    Key,
+    ACL: "public-read",
+    ContentType: file.mimetype,
   }).promise(); // IMPORTANT
+}
+
+function fileNameBuilder(file, itemId, itemType) {
+  // const extension = file.name.trim('.').pop() // jpg
+  const extension = path.extname(file.name); // .jpg
+  const fileName = Date.now();
+
+  return `${itemType}/${itemId}/${fileName}${extension}`;
 }
 
 module.exports = uploadFileToS3;
