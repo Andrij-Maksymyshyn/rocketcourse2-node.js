@@ -6,7 +6,6 @@ const logger = require("morgan");
 
 global.rootPath = __dirname;
 const mainRouter = require("./routes/mainRouter");
-// const cronStarter = require("./cronJobs");
 const { NotFound } = require("./errors/ApiError");
 const { SERVER_ERROR } = require("./errors/errorCodes");
 
