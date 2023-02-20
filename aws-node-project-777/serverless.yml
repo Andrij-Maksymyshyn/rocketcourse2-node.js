@@ -1,0 +1,12 @@
+service: aws-node-project-777
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  hello:
+    handler: handler.hello
+  catAge:
+    handler: catAge.catAge
