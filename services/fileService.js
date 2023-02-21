@@ -8,7 +8,7 @@ const S3 = new AWS_S3({
   secretAccessKey: AWS_SECRET_ACCESS_KEY,
   accessKeyId: AWS_ACCESS_KEY,
   apiVersion: "2006-03-01",
-  signatureVersion: Date.now(),
+  signatureVersion: Date.now().toString(),
 });
 
 function uploadFileToS3(file, itemId, itemType) {
